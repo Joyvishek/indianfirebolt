@@ -1,4 +1,4 @@
-const CLIENT_ID = '';
+const CLIENT_ID = '188720940383-g60pgbovgrn7ke6ve5kofq3nbt3peith.apps.googleusercontent.com';
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
 const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
 
