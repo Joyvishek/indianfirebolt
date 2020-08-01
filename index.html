@@ -9,7 +9,12 @@
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        #content, #authorize-button, #signout-button {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div id="loading">
@@ -48,122 +53,27 @@
     </div>
     <div id="work_container" class="container">
         <div onclick="closework()"><i class="fas fa-angle-right"></i></div>
-        <h1>Youtube Uplaods</h1>
+        <h3>Youtube Uplaods</h3>
         <section>
-          <!--<h2>work title</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p> -->
-    <!--<div data-role="tile" data-size="wide" data-effect="image-set" >
-        <div class="card" >
-            <img src="/Photos/5.jpg" alt="Avatar" style="width:15vw">
-            <div class="tiles">
-                <h4>Ed Sheeran</h4>  
-            </div>
-        </div> -->
-        <iframe width="300" height="200" src="https://www.youtube.com/embed/MXBFDg5dKsY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/SVTXcI0TehM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/wFqBsDYuvoM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-      &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        <iframe width="300" height="200" src="https://www.youtube.com/embed/_ozt3jWFAj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <br></br>
-      <br></br>
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/q_2GRHCKujg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      &nbsp;&nbsp;
-      &nbsp;&nbsp;
-      &nbsp;&nbsp;
-      &nbsp;&nbsp;
-      &nbsp;&nbsp;
-      &nbsp;&nbsp; 
-      &nbsp;&nbsp;
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/9lIu8UABy2k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        <iframe width="300" height="200" src="https://www.youtube.com/embed/aULXUAAV95o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/wFqBsDYuvoM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-      <br></br>
-      <br></br>
-      
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/KIi47FPPqwE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
-     <!-- <iframe width="300" height="200" src="https://www.youtube.com/embed/q_2GRHCKujg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       &nbsp;&nbsp;
-       &nbsp;&nbsp;
-       &nbsp;&nbsp;
-       &nbsp;&nbsp;
-       &nbsp;&nbsp;
-       &nbsp;&nbsp; --> 
-      <!--  <div class="card">
-            <img src="/Photos/6.jpg" alt="Avatar" style="width:15vw">
-            <div class="tiles">
-              <h4>Ed Sheeran</h4>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Photos/DEW.jpg" alt="Avatar" style="width: 15vw;">
-            <div class="tiles">
-              <h4>Ed Sheeran</h4>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Photos/DEW.jpg" alt="Avatar" style="width:15vw">
-            <div class="tiles">
-              <h4>Ed Sheeran</h4>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Photos/DEW.jpg" alt="Avatar" style="width:15vw">
-            <div class="tiles">
-              <h4>Ed Sheeran</h4>
-            </div>
-        </div>
-    </div>
-        
-     <div id="used">
-                <div><i class="fas fa-circle"></i>&nbsp;HTML5</div>
-                <div><i class="fas fa-circle"></i>&nbsp;CSS3</div>
-                <div><i class="fas fa-circle"></i>&nbsp;REACT</div>
-            
-            <button class="btn_one">button 1</button>
-            <button class="btn_two">button 2</button> </div> -->
-        </section> 
+                <h7>Login with :</h7>
+                <button class="btn red" id="authorize-button">Log In</button>
+                <button class="btn red" id="signout-button">Sign Out</button>
+                <br>
+                <div class="content">
+                    <div class="row">
+                        <div class="col s6">
+                            <form id="channel-form">
+                                <div class="input-field">
+                                    <input type="text" placeholder="Enter Channel Name" id="channel-input">
+		                            <input type="submit" value="Get Channel Data">
+                                </div>
+                            </form>
+                        </div>
+                        <div id="clannel-data" class="col s6"></div>
+                    </div>
+                    <div class="row" id="video-container"></div>
+                </div>
+        </section>
     </div>
     <div id="about_container" class="container">
             <div onclick="closeabout()"><i class="fas fa-angle-left"></i></div>
@@ -196,7 +106,7 @@
                 </p>
             </section>
         </div>
-          <div id="contact_container" class="container">
+        <div id="contact_container" class="container">
             <div onclick="closecontact()"><i class="fas fa-angle-down"></i></div>
             <h1>Contact Me</h1>
             <section>
@@ -213,8 +123,9 @@
         </div>
         <div id="footer">
         </div>
-    <script src="index.js" type="text/javascript"></script>
-    <script src="particles.js"></script>
-    <script src="app.js"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/app.js"></script>
+    <script async defer src="https://apis.google.com.js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState == 'complete') this.onload()"></script>
 </body>
 </html>
