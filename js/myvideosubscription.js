@@ -9,7 +9,13 @@ const channelForm = document.getElementById('channel-form');
 const channelInput = document.getElementById('channel-input');
 const videoContainer = document.getElementById('video-container');
 
-// const defaultChannel = 
+const defaultChannel = 'The IndianFirebolt';
+
+channelForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const channel = channelInput.value;
+    getChannel(channel);
+});
 
 function handleClinetLoad() {
     gapi.load('client:auth2', initClient);
@@ -52,3 +58,63 @@ function handleSignoutClick() {
     gapi.auth2.getAuthInstance().signOut();
 }
 
+function showChannelData(data) {
+    const channelData = document.getElementById('channel-data');
+    channelData.innerHTML = data;
+}
+
+function getChannel(channel) {
+    gapi.client.youtube.channels.list({
+        part: 'snippet,contentDetails,statistics',
+        forUsername: channel
+    })
+    .then(response => {
+        console.log(response);
+        const channel = response.result.items[0];
+
+        const output =`
+        <ul class="collection">
+            <li class="collection-item">Title: ${channel.snippet.title}</li>
+            <li class="collection-item">ID: ${channel.id}</li>
+            <li class="collection-item">Subscribers: ${channel.statistics.subscriberCount}</li>
+            <li class="collection-item">Views: ${channel.statistics.viewCount}</li>
+            <li class="collection-item">Title: ${channel.snippet.title}</li>
+        </ul>
+        <p>${channel.snippet.description}</p>
+        <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">Visit Channel</a>
+        `;
+        showChannelData(output);
+
+        const playlistId = channel.contentDetals.relatedPlaylists.uploads;
+        requestVideoPlaylist(playlistId);
+    })
+    .catch(err => alert('No channel'));
+}
+
+function requestVideoPlaylist(playlistId){
+    const requestOptions = {
+        playlistId: playlistId,
+        part: 'snippet',
+        maxResults: 10
+    }
+
+    const request = gapi.client.youtube.playlistItems.list(requestOptions);
+    request.execute(response => {
+        console.log(response);
+        const playlistItems = response.result.items;
+        if(playlistItems) {
+            let = '<br><h4 class="center-align">Latest Videos</h4>';
+            playlistItems.forEach(item => {
+                const videoId = item.snippet.resourceId.videoId;
+                output += `
+                    <div class="col s3">
+                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div> 
+                `;
+            });
+            videoContainer.innerHTML = output;
+        } else {
+            videoContainer.innerHTML = 'No Uploaded Videos';
+        }
+    });
+}
