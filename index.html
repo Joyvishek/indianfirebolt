@@ -47,6 +47,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- <script src="/indianfirebolt/js/youtube.js"></script> -->
     <script src="/indianfirebolt/js/myvideosubscription.js"></script>
-    <script src="https://apis.google.com/js/api.js?onload=onLoadCallback" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+<script>
+window.onLoadCallback = function(){
+  gapi.auth2.init({
+      client_id: 'filler_text_for_client_id.apps.googleusercontent.com'
+    });
+}
+</script>
+
 </body>
 </html>
