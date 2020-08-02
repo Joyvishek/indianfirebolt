@@ -1,19 +1,19 @@
-const CLIENT_ID = '188720940383-9h1q9rc44f0g0llre09g68b26301l81h.apps.googleusercontent.com';
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
-const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
+// var CLIENT_ID = '188720940383-9h1q9rc44f0g0llre09g68b26301l81h.apps.googleusercontent.com';
+// var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+var SCOPE = 'https://www.googleapis.com/auth/youtube.readonly';
 
-const authorizeButton = document.getElementById('authorize-button');
-const signoutButton = document.getElementById('signout-button');
-const content = document.getElementById('content');
-const channelForm = document.getElementById('channel-form');
-const channelInput = document.getElementById('channel-input');
-const videoContainer = document.getElementById('video-container');
+var authorizeButton = document.getElementById('authorize-button');
+var signoutButton = document.getElementById('signout-button');
+var content = document.getElementById('content');
+var channelForm = document.getElementById('channel-form');
+var channelInput = document.getElementById('channel-input');
+var videoContainer = document.getElementById('video-container');
 
-const defaultChannel = 'The IndianFirebolt';
+var defaultChannel = 'The IndianFirebolt';
 
 channelForm.addEventListener('submit', e => {
     e.preventDefault();
-    const channel = channelInput.value;
+    var channel = channelInput.value;
     getChannel(channel);
 });
 
@@ -22,10 +22,15 @@ function handleClinetLoad() {
 }
 
 function initClient() {
+    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
     gapi.client.init({
-        discoveryDocs: DISCOVERY_DOCS,
-        clientId: CLIENT_ID,
-        scope: SCOPES
+        // discoveryDocs: DISCOVERY_DOCS,
+        // clientId: CLIENT_ID,
+        // scope: SCOPES
+        'apiKey': 'AIzaSyAzJrieP_7_MRmqNCWFIE18Cxg8tHUiuog',
+        'clientId': '188720940383-9h1q9rc44f0g0llre09g68b26301l81h.apps.googleusercontent.com',
+        'discoveryDocs': [discoveryUrl],
+        'scope': SCOPE
     }).then(()=> {
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
@@ -59,7 +64,7 @@ function handleSignoutClick() {
 }
 
 function showChannelData(data) {
-    const channelData = document.getElementById('channel-data');
+    var channelData = document.getElementById('channel-data');
     channelData.innerHTML = data;
 }
 
@@ -70,9 +75,9 @@ function getChannel(channel) {
     })
     .then(response => {
         console.log(response);
-        const channel = response.result.items[0];
+        var channel = response.result.items[0];
 
-        const output =`
+        var output =`
         <ul class="collection">
             <li class="collection-item">Title: ${channel.snippet.title}</li>
             <li class="collection-item">ID: ${channel.id}</li>
@@ -85,27 +90,27 @@ function getChannel(channel) {
         `;
         showChannelData(output);
 
-        const playlistId = channel.contentDetals.relatedPlaylists.uploads;
+        var playlistId = channel.contentDetals.relatedPlaylists.uploads;
         requestVideoPlaylist(playlistId);
     })
     .catch(err => alert('No channel'));
 }
 
 function requestVideoPlaylist(playlistId){
-    const requestOptions = {
+    var requestOptions = {
         playlistId: playlistId,
         part: 'snippet',
         maxResults: 10
     }
 
-    const request = gapi.client.youtube.playlistItems.list(requestOptions);
+    var request = gapi.client.youtube.playlistItems.list(requestOptions);
     request.execute(response => {
         console.log(response);
-        const playlistItems = response.result.items;
+        var playlistItems = response.result.items;
         if(playlistItems) {
             let = '<br><h4 class="center-align">Latest Videos</h4>';
             playlistItems.forEach(item => {
-                const videoId = item.snippet.resourceId.videoId;
+                var videoId = item.snippet.resourceId.videoId;
                 output += `
                     <div class="col s3">
                     <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
