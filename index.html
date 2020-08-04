@@ -5,11 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- <style>
-        #content, #authorize-button, #signout-button {
-            display: none
-        }
-    </style> -->
+    <style>
+        #content, #authorize-button, #signout-button {display: none;}
+    </style>
 	<title>Youtube Data</title>
 </head>
 <body>
@@ -20,7 +18,7 @@
 			</div>
 		</div>
 	</nav>
-	<br>
+    <br>
 	<section>
 		<div class="container">
 			<p>Log In With Google</p>
@@ -29,15 +27,15 @@
                 <br>
                 <div class="content">
                     <div class="row">
-                        <div class="col s6">
+                        <!-- <div class="col s6">
                             <form id="channel-form">
                                 <div class="input-field col s6">
                                     <input type="text" placeholder="Enter Channel Name" id="channel-input">
 		                            <input type="submit" value="Get Channel Data" class="btn grey">
                                 </div>
                             </form>
-                        </div>
-                        <div id="clannel-data" class="col s6"></div>
+                        </div> -->
+                        <div id="channel-data" class="col s12"></div>
                     </div>
                     <div class="row" id="video-container"></div>
                 </div>
@@ -46,15 +44,10 @@
 	<!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- <script src="/indianfirebolt/js/youtube.js"></script> -->
-    <script src="/indianfirebolt/js/myvideosubscription.js"></script>
-    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-<script>
-window.onLoadCallback = function(){
-  gapi.auth2.init({
-      client_id: 'filler_text_for_client_id.apps.googleusercontent.com'
-    });
-}
-</script>
-
+    <script src="myvideosubscription.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
 </body>
 </html>
