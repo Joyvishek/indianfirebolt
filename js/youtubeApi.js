@@ -1,5 +1,5 @@
 var API_KEY = 'AIzaSyAzJrieP_7_MRmqNCWFIE18Cxg8tHUiuog';
-var CLIENT_ID = '188720940383-u66oaerd2d5uggtsrjrt70501g3q3bjt.apps.googleusercontent.com';
+var CLIENT_ID = '188720940383-7th3orj2hv2upbfl4ik6pmcr4on06qk8.apps.googleusercontent.com';
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
 var SCOPES =  'https://www.googleapis.com/auth/youtube.force-ssl';
 
@@ -11,7 +11,6 @@ var channelForm = document.getElementById('channel-form');
 var videoContainer = document.getElementById('video-container');
 
 var defaultChannel = 'googledevelopers';
-
 // channelForm.addEventListener('submit', e => {
 //     e.preventDefault();
 //     var channel = channelInput.value;
@@ -79,26 +78,36 @@ function showChannelData(data) {
 function getChannel(channel) {
     gapi.client.youtube.channels.list({
         part: 'snippet,contentDetails,statistics',
-        forUsername: channel
+        id: 'UCe56UY0Ui8Mu3RttGaJpSBQ'
     })
     .then((response) => {
         console.log(response);
         var channel = response.result.items[0];
         var output =`
-        <ul class="collection">
-            <li class="collection-item">Title: ${channel.snippet.title}</li>
-            <li class="collection-item">ID: ${channel.id}</li>
-            <li class="collection-item">Subscribers: ${channel.statistics.subscriberCount}</li>
-            <li class="collection-item">Views: ${channel.statistics.viewCount}</li>
-            <li class="collection-item">Title: ${channel.snippet.title}</li>
-        </ul>
-        <p>${channel.snippet.description}</p>
-        <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">Visit Channel</a>
+        <h2 class="font-weight-bold" style="color: red;">${channel.snippet.title}</h2>
+        <p style="color: white;">${channel.snippet.description}</p>
+        <a class="btn btn-md" target="_blank" href="https://youtube.com/channel/${channel.id}">Visit Channel</a>
+        <a class="btn btn-md btn-youtube="addSubscription()">Subscribe</a>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 mb-5 mb-lg-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-user"></i>
+            </span>
+            <h4><strong>${channel.statistics.subscriberCount}</strong></h4>
+          </div>
+          <div class="col-lg-6 col-md-6 mb-5 mb-md-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-like"></i>
+            </span>
+            <h4><strong>${channel.statistics.viewCount}</strong></h4>
+          </div>
+        </div>
         `;
         showChannelData(output);
 
         var playlistId = channel.contentDetails.relatedPlaylists.uploads;
-        console.log(playlistId);
+        // console.log(playlistId);
+        // loadVideo(videoId);
         requestVideoPlaylist(playlistId);
     });
 }
@@ -117,18 +126,21 @@ function requestVideoPlaylist(playlistId) {
       console.log(response);
       var playListItems = response.result.items;
       if (playListItems) {
-        let output = '<br><h4 class="center-align">Latest Videos</h4>';
-  
+        
+        let output = '<br><h4 class="align_cente font-weight-bold" style="color: red;">Latest Videos</h4>';
         playListItems.forEach(item => {
           var videoId = item.snippet.resourceId.videoId;
-  
+          var thumb = item.snippet.thumbnails.medium.url;
+          var title = item.snippet.title;
+          var desc = item.snippet.description.substring(0, 100);
           output += `
-            <div class="col s3">
-            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="col-lg-3 col-md-4 col-sm-12" onclick="loadVideo(${videoId});">
+              <img src="${thumb}">
+              <h4>${title}</h4>
+              <p>${desc}</p>
             </div>
-          `;
+          `
         });
-  
         videoContainer.innerHTML = output;
       } else {
         videoContainer.innerHTML = 'No Uploaded Videos';
@@ -136,6 +148,47 @@ function requestVideoPlaylist(playlistId) {
     });
   }
 
+  function addSubscription() {
+    var channelId = 'UCe56UY0Ui8Mu3RttGaJpSBQ';
+    // var resource = {
+    //   snippet: {
+    //     resourceId: {
+    //       kind: 'youtube#channel',
+    //       channelId: channelId
+    //     }
+    //   }
+    // };
+    return gapi.client.youtube.subscriptions.insert({
+      part: 'snippet',
+      resource:{
+        snippet:{
+          resourceId:{
+            kind: 'youtube#channel',
+            channelId: channelId
+          }
+        }
+      }
+    })
+    .then(function(response){
+      M.toast({html: 'You have subscribed', classes: 'rounded'});
+      console.log(response);
+    }, function(err){
+      console.log(err);
+    })
+    // try {
+    //   // var response = gapi.client.youtube.subscriptions.insert(resource, 'snippet');
+    // } catch (e) {
+    //   if(e.message.match('subscriptionDuplicate')) {
+    //     console.log('Cannot subscribe; already subscribed to channel: ' + channelId);
+    //   } else {
+    //     console.log('Error adding subscription: ' + e.message);
+    //   }
+    // }
+  }
+
+  function loadVideo(videoId) {
+    $('#video').html(`<iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`);
+  }
 //   function requestVideoPlaylist(playlistId){
 //     gapi.client.youtube.playlistItems.list({
 //         playlistId: playlistId,
